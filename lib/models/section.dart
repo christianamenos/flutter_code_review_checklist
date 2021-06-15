@@ -18,7 +18,7 @@ class Section {
               as List<Map<String, dynamic>>)
           .map((checkItem) => CheckItem.fromJson(checkItem))
           .toList(),
-      subsections: (json['subsections'] as List<Map>)
+      subsections: (json['subsections'] as List)
           .map((subsection) => Section.fromJson(subsection))
           .toList(),
     );
