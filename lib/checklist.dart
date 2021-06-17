@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
+import 'chech_item_row.dart';
 import 'models/section.dart';
 
 class CheckList extends StatelessWidget {
   final Section checklist;
+  final Function checkboxHandler;
   static const DEFAULT_MARGIN = 10.0;
 
-  CheckList(this.checklist);
+  // final Function checkboxHandler;
+
+  // CheckList(this.checklist, this.checkboxHandler);
+  CheckList(this.checklist, this.checkboxHandler);
 
   @override
   Widget build(BuildContext context) {
@@ -30,20 +35,15 @@ class CheckList extends StatelessWidget {
               ...this
                   .checklist
                   .checkItems
-                  .map((checkItem) => Row(
-                        children: [
-                          Checkbox(
-                            value: checkItem.checked,
-                            onChanged: (b) => {},
-                          ),
-                          Text(checkItem.text),
-                        ],
-                      ))
+                  .map((checkItem) => CheckItemRow(
+                      checkItem: checkItem, checkboxHandler: checkboxHandler))
+                  // .map((checkItem) => CheckItemRow(checkItem, this.checkboxHandler))
                   .toList(),
               ...this
                   .checklist
                   .subsections
-                  .map((subsection) => CheckList(subsection))
+                  .map((subsection) => CheckList(subsection, checkboxHandler))
+                  // .map((subsection) => CheckList(subsection, this.checkboxHandler))
                   .toList(),
             ],
           ),

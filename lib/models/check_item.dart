@@ -7,7 +7,7 @@ class CheckItem {
     this.checked = false,
   });
 
-  factory CheckItem.fromJson(Map json) {
+  factory CheckItem.fromMap(Map json) {
     return CheckItem(
       text: json['text'],
       checked: json['checked'],

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'check_list.dart';
+import 'checklist.dart';
+import 'models/check_item.dart';
 import 'models/section.dart';
+import 'repositories/checklist_repository.dart';
+import 'repositories/checklist_repository_map.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,68 +32,57 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var checkSections = [];
+  List<Section> checklistSections = [];
+  ChecklistRepository checklistRepository = ChecklistRepositoryMap();
 
-  /*
-   * TODO: call resetChecklist? Move somewhere else? Probably this is called
-   * eveytime the widget is rendered, for example after minimizing the app.
-   */
+  @override
+  void initState() {
+    super.initState();
+    this.checklistSections = this.checklistRepository.getDefaultChecklist();
+  }
+
+  void checkboxHandler(CheckItem checkItem) {
+    print("Execute handler");
+    print(checkItem.text);
+    print(checkItem.checked);
+    var found = this._iterateSubsectionsToUpdateCheckItem(this.checklistSections, checkItem);
+    print("FOUND?");
+    print(found);
+    print(this.checklistSections.toString());
+  }
+
+  // bool iterateCheckItems
+  bool _iterateSubsectionsToUpdateCheckItem(
+      List<Section> sections, CheckItem targetCheckItem) {
+    for (var section in sections) {
+      for (var checkItem in section.checkItems) {
+        if (checkItem.text == targetCheckItem.text) {
+          checkItem.checked = targetCheckItem.checked;
+          return true;
+        }
+      }
+      return _iterateSubsectionsToUpdateCheckItem(
+          section.subsections, targetCheckItem);
+    }
+    return false;
+  }
 
   void _resetChecklist() {
     setState(() {
-      // TODO: clean checklists
-      /*
-        {
-          'section_name': 'Correctness',
-        },
-        {
-          'section_name': 'Documentation',
-        },
-        {
-          'section_name': 'Testing',
-          'check_items': ['coverage': false,
-          'branch_coverage': false,]
-        }
-        */
+      this.checklistSections = this.checklistRepository.getDefaultChecklist();
     });
   }
 
   List<Widget> _buildChecklist() {
-    var sections = [
-      {
-        'section_name': 'Readability',
-        'check_items': [
-          {
-            'text': 'The code is correctly indented',
-            'checked': false,
-          },
-          {
-            'text': 'The code format is consistent',
-            'checked': false,
-          },
-        ],
-        'subsections': [
-          {
-            'section_name': 'Variables',
-            'check_items': [
-              {
-                'text': 'Variable names are understandable',
-                'checked': false,
-              },
-            ],
-            'subsections': [],
-          }
-        ]
-      },
-    ];
-    return sections.map((sectionMap) {
-      var section = Section.fromJson(sectionMap);
-      return CheckList(section);
-    }).toList();
+    print('IEP!');
+    return checklistSections
+        .map((section) => CheckList(section, checkboxHandler))
+        .toList();
   }
 
   @override
   Widget build(BuildContext context) {
+    print("BUILD MAIN!");
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
