@@ -8,9 +8,6 @@ class CheckList extends StatelessWidget {
   final Function checkboxHandler;
   static const DEFAULT_MARGIN = 10.0;
 
-  // final Function checkboxHandler;
-
-  // CheckList(this.checklist, this.checkboxHandler);
   CheckList(this.checklist, this.checkboxHandler);
 
   @override
@@ -36,14 +33,17 @@ class CheckList extends StatelessWidget {
                   .checklist
                   .checkItems
                   .map((checkItem) => CheckItemRow(
-                      checkItem: checkItem, checkboxHandler: checkboxHandler))
-                  // .map((checkItem) => CheckItemRow(checkItem, this.checkboxHandler))
+                        checkItem: checkItem,
+                        checkboxHandler: checkboxHandler,
+                      ))
                   .toList(),
               ...this
                   .checklist
                   .subsections
-                  .map((subsection) => CheckList(subsection, checkboxHandler))
-                  // .map((subsection) => CheckList(subsection, this.checkboxHandler))
+                  .map((subsection) => CheckList(
+                        subsection,
+                        checkboxHandler,
+                      ))
                   .toList(),
             ],
           ),

@@ -28,13 +28,12 @@ class Section {
   String toString() {
     var checkItemsString = '[';
     this.checkItems.forEach((checkItem) {
-      checkItemsString +=
-          ' { name: ${checkItem.text}, checked: ${checkItem.checked} }, ';
+      checkItemsString += ' ${checkItem.toString()}, ';
     });
     checkItemsString += ']';
     var subsectionsString = '[';
     this.subsections.forEach((subsection) {
-      subsectionsString += ' { ${subsection.toString()} }, ';
+      subsectionsString += ' ${subsection.toString()}, ';
     });
     subsectionsString += ']';
     return '{ sectionName: ${this.sectionName}, check_items: $checkItemsString, subsections: $subsectionsString }';

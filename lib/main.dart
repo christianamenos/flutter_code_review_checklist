@@ -42,16 +42,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void checkboxHandler(CheckItem checkItem) {
-    print("Execute handler");
-    print(checkItem.text);
-    print(checkItem.checked);
-    var found = this._iterateSubsectionsToUpdateCheckItem(this.checklistSections, checkItem);
-    print("FOUND?");
-    print(found);
-    print(this.checklistSections.toString());
+    setState(() {
+      // The checkItem was changed in the checkItem reference
+    });
   }
 
-  // bool iterateCheckItems
   bool _iterateSubsectionsToUpdateCheckItem(
       List<Section> sections, CheckItem targetCheckItem) {
     for (var section in sections) {
@@ -74,7 +69,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   List<Widget> _buildChecklist() {
-    print('IEP!');
     return checklistSections
         .map((section) => CheckList(section, checkboxHandler))
         .toList();
@@ -82,7 +76,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print("BUILD MAIN!");
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //

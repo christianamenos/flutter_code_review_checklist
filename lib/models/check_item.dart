@@ -13,4 +13,16 @@ class CheckItem {
       checked: json['checked'],
     );
   }
+
+  factory CheckItem.clone({required CheckItem original, bool? checked}) {
+    return CheckItem(
+      text: original.text,
+      checked: checked ?? original.checked,
+    );
+  }
+
+  @override
+  String toString() {
+    return '{ name: ${this.text}, checked: ${this.checked} }';
+  }
 }

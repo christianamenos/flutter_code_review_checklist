@@ -19,8 +19,6 @@ class ChecklistRepositoryMap implements ChecklistRepository {
   }
 
   List<Section> _buildSectionListFromMap(List<Map> defaultSections) {
-    print('!!!');
-    print(defaultSections.toString());
     return defaultSections
         .map((sectionMap) => Section.fromMap(sectionMap))
         .toList();
