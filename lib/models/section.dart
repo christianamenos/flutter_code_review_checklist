@@ -20,7 +20,7 @@ class Section {
               as List<dynamic>)
           .map((checkItem) => CheckItem.fromMap(checkItem))
           .toList(),
-      subsections: (json['subsections'] as List)
+      subsections: (json['subsections'] ?? [])
           .map((subsection) => Section.fromMap(subsection))
           .toList(),
     );

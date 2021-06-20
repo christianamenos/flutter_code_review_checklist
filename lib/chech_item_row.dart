@@ -22,7 +22,13 @@ class CheckItemRow extends StatelessWidget {
             this.checkboxHandler(this.checkItem);
           },
         ),
-        Text(checkItem.text),
+        Text(
+          checkItem.text,
+          style: TextStyle(
+              decoration: this.checkItem.checked
+                  ? TextDecoration.lineThrough
+                  : TextDecoration.none),
+        ),
       ],
     );
   }
