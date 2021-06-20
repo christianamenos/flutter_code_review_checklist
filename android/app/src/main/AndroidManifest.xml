@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.christianamenos.code_review_checklist">
    <application
-        android:label="code_review_checklist"
+        android:label="Code Review Checklist"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

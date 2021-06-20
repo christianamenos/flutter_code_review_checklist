@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class CheckItem {
   String text;
   bool checked;
@@ -14,6 +16,13 @@ class CheckItem {
     );
   }
 
+  Map toMap() {
+    return {
+      'text': this.text,
+      'checked': this.checked,
+    };
+  }
+
   factory CheckItem.clone({required CheckItem original, bool? checked}) {
     return CheckItem(
       text: original.text,
@@ -23,6 +32,14 @@ class CheckItem {
 
   @override
   String toString() {
-    return '{ name: ${this.text}, checked: ${this.checked} }';
+    return '{ text: ${this.text}, checked: ${this.checked} }';
+  }
+
+  String toJson() {
+    return jsonEncode(this.toMap());
+  }
+
+  factory CheckItem.fromJson(String json) {
+    return CheckItem.fromMap(jsonDecode(json));
   }
 }

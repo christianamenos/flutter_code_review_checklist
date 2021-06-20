@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'check_item.dart';
 
 class Section {
@@ -15,13 +17,23 @@ class Section {
     return Section(
       sectionName: json['section_name'] ?? json['sectionName'],
       checkItems: ((json['check_items'] ?? json['checkItems'] ?? [])
-              as List<Map<String, dynamic>>)
+              as List<dynamic>)
           .map((checkItem) => CheckItem.fromMap(checkItem))
           .toList(),
       subsections: (json['subsections'] as List)
           .map((subsection) => Section.fromMap(subsection))
           .toList(),
     );
+  }
+
+  Map toMap() {
+    return {
+      'section_name': this.sectionName,
+      'check_items':
+          this.checkItems.map((checkItem) => checkItem.toMap()).toList(),
+      'subsections':
+          this.subsections.map((subsection) => subsection.toMap()).toList(),
+    };
   }
 
   @override
@@ -32,10 +44,20 @@ class Section {
     });
     checkItemsString += ']';
     var subsectionsString = '[';
-    this.subsections.forEach((subsection) {
-      subsectionsString += ' ${subsection.toString()}, ';
-    });
+    subsectionsString += this
+        .subsections
+        .map((subsection) => subsection.toString())
+        .join(", ")
+        .toString();
     subsectionsString += ']';
     return '{ sectionName: ${this.sectionName}, check_items: $checkItemsString, subsections: $subsectionsString }';
+  }
+
+  String toJson() {
+    return jsonEncode(this.toMap());
+  }
+
+  factory Section.fromJson(String json) {
+    return Section.fromMap(jsonDecode(json));
   }
 }

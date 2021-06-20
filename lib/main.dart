@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'checklist.dart';
 import 'models/check_item.dart';
@@ -39,32 +40,41 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     this.checklistSections = this.checklistRepository.getDefaultChecklist();
+    _getLastState();
+  }
+
+  _saveLastState() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setStringList(
+      "checklist",
+      this.checklistSections.map((section) => section.toJson()).toList(),
+    );
+  }
+
+  void _getLastState() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var checklistStringList = preferences
+        .getStringList("checklist")
+        ?.map((sectionJson) => Section.fromJson(sectionJson))
+        .toList();
+    if (checklistStringList != null) {
+      setState(() {
+        this.checklistSections = checklistStringList;
+      });
+    }
   }
 
   void checkboxHandler(CheckItem checkItem) {
+    _saveLastState();
     setState(() {
       // The checkItem was changed in the checkItem reference
     });
   }
 
-  bool _iterateSubsectionsToUpdateCheckItem(
-      List<Section> sections, CheckItem targetCheckItem) {
-    for (var section in sections) {
-      for (var checkItem in section.checkItems) {
-        if (checkItem.text == targetCheckItem.text) {
-          checkItem.checked = targetCheckItem.checked;
-          return true;
-        }
-      }
-      return _iterateSubsectionsToUpdateCheckItem(
-          section.subsections, targetCheckItem);
-    }
-    return false;
-  }
-
   void _resetChecklist() {
     setState(() {
       this.checklistSections = this.checklistRepository.getDefaultChecklist();
+      _saveLastState();
     });
   }
 
