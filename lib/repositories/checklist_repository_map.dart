@@ -25,89 +25,27 @@ class ChecklistRepositoryMap implements ChecklistRepository {
   }
 
   List<Map> _getDefaultChecklistMap() {
-    /*
-    CORRECTNESS:
-    - Does the code expose/uses the API as agreed?
-    - Does the change only include the expected changes?
-    - Is content (texts/number/dates/timezone/...) localized?
-    - There are too many changes? (divide into smaller code reviews, nobody wants to read long code reviews, and focus decreases over time)
-
-    TESTING:
-    - Was the code tested end to end? (what are the steps to test the code)
-    - Do tests verify the correctness of the change?
-    - Do test cover edge cases / errors / exceptions?
-    - Does it have enough automated tests (unit/integration/e2e)?
-    - Was main branch rebased / merged with latest changes and test it again?
-    - Was it tested on the targeted devices/languages?
-    - Was the change self-reviewed?
-
-    CODE STYLE:
-    - Removed unnecessary comments?
-    - Are comments formatted properly (javadoc, ...)?
-    - Are the name of the variables/functions/classes clear?
-    - Does the code follow the existing code style?
-    - Is unused code removed?
-    - Is code correctly indented? (even more is it automatically formatted?)
-
-    DOCUMENTATION:
-    - Does the commit message describe what was changed?
-    - Does the commit message contain a reference to the task (jira/trello/...)?
-    - Does the code commit message contain a visual demonstrating the UX of the change? (either an image or a video with a demonstration on what was changed and final UX to get sooner feedback from Product Owners)
-    - Are all reviewers added?
-    - Are comments understandable and free of typographical errors?
-
-    BEST PRACTICES:
-    - The code is not over-engineering?
-    - Are functions short and do what they say?
-    - Is there an alternative/simpler way to do the same?
-    - Are unused imports removed?
-    - Is the code scalable?
-    - Is the code thread-safe?
-    - Does the code follow Design Principles? (like SOLID, architectures, design patterns, language specific patterns, ...)
-    - Are errors handled the correct way?
-    - Are configuration/build artifacts ignored by the change? (.idea/.vscode/build/...)
-    - The code does not use hardcoded values, use constants/configuration values?
-    - Does the code avoid having multiple if/else/switch blocks?
-    - Is the code null-safe?
-    - Does the code use features from language/framework instead of reinventing the wheel?
-    - There is no duplicated code?
-    - Does the change affect the performance of the system (CPU/Memory/Disk/Network)? (implies caching systems, performant code, ...)
-
-    DEPENDENCIES:
-    - Are dependencies in deprecation state/obsolete?
-    - Are vulnerable dependencies addressed?
-
-    LOGS AND METRICS:
-    - Were debug logs or prints removed?
-    - Are important events logged?
-    - Does the code create metrics to monitor the healthiness of the system?
-
-    SECURITY AND PRIVACY:
-    - The change is not exposing private information or exploitable endpoints? (we are not exposing information to incorrect users or hacker)
-    - Are data inputs sanitized?
-    - Is private information encrypted properly?
-    - The code is secure (XSS/SQL injection/authentication/authorization/encryption/...)?
-     */
-
     return [
       {
-        'section_name': '',
+        'section_name': 'Correctness',
         'check_items': [
           {
-            'text': '',
-            'checked': false,
-          },
-        ],
-      },
-      {
-        'section_name': 'Best practices',
-        'check_items': [
-          {
-            'text': '',
+            'text': 'The code exposes or uses the API as agreed',
             'checked': false,
           },
           {
-            'text': 'Follows SOLID principles',
+            'text':
+                'The change solves the expected purpose and only this purpose',
+            'checked': false,
+          },
+          {
+            'text':
+                'The content (texts/number/dates/timezone/...) is localized',
+            'checked': false,
+          },
+          {
+            'text':
+                'There are too many changes? (divide into smaller code reviews, nobody wants to read long code reviews, and focus decreases over time)',
             'checked': false,
           },
         ],
@@ -116,72 +54,212 @@ class ChecklistRepositoryMap implements ChecklistRepository {
         'section_name': 'Testing',
         'check_items': [
           {
-            'text': 'Is test/branch coverage above the threshold?',
+            'text':
+                'The code was tested end to end (What are the steps to test the code?)',
             'checked': false,
           },
           {
-            'text': 'Are corner cases tested?',
+            'text': 'Tests verify the correctness of the change',
             'checked': false,
           },
           {
-            'text': 'Are ',
+            'text': 'Test cover edge cases / errors / exceptions',
             'checked': false,
-          }
+          },
+          {
+            'text': 'Has enough automated tests (unit / integration / e2e)',
+            'checked': false,
+          },
+          {
+            'text':
+                'Main branch was rebased / merged with latest changes and test it again',
+            'checked': false,
+          },
+          {
+            'text': 'The change was tested on the targeted devices / languages',
+            'checked': false,
+          },
+          {
+            'text': 'The change self-reviewed',
+            'checked': false,
+          },
         ],
       },
-      /*
       {
-        'section_name': '',
+        'section_name': 'Code style',
         'check_items': [
           {
-            'text': '',
+            'text': 'The name of the variables / functions / classes are clear',
             'checked': false,
           },
-        ],
-        'subsections': []
-      },
-      */
-      /*
-      {
-        'section_name': 'Readability',
-        'check_items': [
+          {
+            'text': 'The code follows the existing code style',
+            'checked': false,
+          },
+          {
+            'text': 'The code does not include unused code or imports',
+            'checked': false,
+          },
           {
             'text': 'The code is correctly indented',
             'checked': false,
           },
+        ],
+      },
+      {
+        'section_name': 'Documentation',
+        'check_items': [
           {
-            'text': 'The code format is consistent',
+            'text': 'The code does not have unnecessary comments',
+            'checked': false,
+          },
+          {
+            'text': 'Comments are formatted properly (javadoc, ...)',
+            'checked': false,
+          },
+          {
+            'text':
+                'The code review / commit message describe what was changed',
+            'checked': false,
+          },
+          {
+            'text':
+                'The code review / commit message contain a reference to the task (jira / trello / ...)',
+            'checked': false,
+          },
+          {
+            'text':
+                'The code review / commit message contain a visual demonstrating the UX of the change',
+            'checked': false,
+          },
+          {
+            'text': 'Are all reviewers were added',
+            'checked': false,
+          },
+          {
+            'text':
+                'The comments are understandable and free of typographical errors',
             'checked': false,
           },
         ],
-        'subsections': [
-          {
-            'section_name': 'Variables',
-            'check_items': [
-              {
-                'text': 'Variable names are understandable',
-                'checked': false,
-              },
-            ],
-            'subsections': [],
-          }
-        ]
       },
-    ];
-    */
-    /*
-        {
-          'section_name': 'Correctness',
-        },
-        {
-          'section_name': 'Documentation',
-        },
-        {
-          'section_name': 'Testing',
-          'check_items': ['coverage': false,
-          'branch_coverage': false,]
-        }
-        */
+      {
+        'section_name': 'Best practices',
+        'check_items': [
+          {
+            'text': 'The solution is not over-engineering',
+            'checked': false,
+          },
+          {
+            'text': 'Functions are short and do what their name say',
+            'checked': false,
+          },
+          {
+            'text': 'There is not a better / simpler way to do the same',
+            'checked': false,
+          },
+          {
+            'text': 'The code is scalable',
+            'checked': false,
+          },
+          {
+            'text': 'The code is thread-safe',
+            'checked': false,
+          },
+          {
+            'text':
+                'The code follow Design Principles (SOLID, architectures, design patterns, language specific patterns, ...)',
+            'checked': false,
+          },
+          {
+            'text': 'Errors are correctly handled',
+            'checked': false,
+          },
+          {
+            'text':
+                'Configuration / build artifacts are not added in this change (.idea / .vscode / build / ...)',
+            'checked': false,
+          },
+          {
+            'text':
+                'The code does not use hardcoded values, uses constants / configuration values instead',
+            'checked': false,
+          },
+          {
+            'text': 'The code avoids multiple if-else / switch blocks',
+            'checked': false,
+          },
+          {
+            'text': 'The code is null-safe',
+            'checked': false,
+          },
+          {
+            'text':
+                'The code makes use of language / framework specific features (does not reinventing the wheel)',
+            'checked': false,
+          },
+          {
+            'text': 'It does not exist duplicated code',
+            'checked': false,
+          },
+          {
+            'text':
+                'The change does not affect the performance of the system (CPU / Memory / Disk / Network)',
+            'checked': false,
+          },
+        ],
+      },
+      {
+        'section_name': 'Dependencies',
+        'check_items': [
+          {
+            'text': 'There are no deprecated / obsolete dependencies',
+            'checked': false,
+          },
+          {
+            'text': 'Vulnerable dependencies were addressed',
+            'checked': false,
+          },
+        ],
+      },
+      {
+        'section_name': 'Logs and metrics',
+        'check_items': [
+          {
+            'text': 'Debug logs or prints were removed',
+            'checked': false,
+          },
+          {
+            'text': 'Important events are logged',
+            'checked': false,
+          },
+          {
+            'text': 'The code creates metrics to monitor the healthiness of the system',
+            'checked': false,
+          },
+          ],
+      },
+      {
+        'section_name': 'Security and privacy',
+        'check_items': [
+          {
+            'text': 'The change is not exposing private information or endpoints (we are not exposing information to unauthorized users or hackers)',
+            'checked': false,
+          },
+          {
+            'text': 'Inputs data is properly sanitized',
+            'checked': false,
+          },
+          {
+            'text': 'Private information is encrypted properly',
+            'checked': false,
+          },
+          {
+            'text': 'The code is protected to most common attacks (XSS / SQL injection / authentication / authorization / encryption / ...)',
+            'checked': false,
+          },
+        ],
+      },
     ];
   }
 }

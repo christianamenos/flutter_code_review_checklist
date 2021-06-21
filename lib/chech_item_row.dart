@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'models/check_item.dart';
 
 class CheckItemRow extends StatelessWidget {
+  static const DEFAULT_MARGIN = 13.0;
   final CheckItem checkItem;
   final Function checkboxHandler;
 
@@ -14,6 +15,7 @@ class CheckItemRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Checkbox(
           value: checkItem.checked,
@@ -22,12 +24,20 @@ class CheckItemRow extends StatelessWidget {
             this.checkboxHandler(this.checkItem);
           },
         ),
-        Text(
-          checkItem.text,
-          style: TextStyle(
-              decoration: this.checkItem.checked
-                  ? TextDecoration.lineThrough
-                  : TextDecoration.none),
+        Expanded(
+          child: Container(
+            margin: EdgeInsets.only(
+                top: DEFAULT_MARGIN,
+            ),
+            child: Text(
+              checkItem.text,
+              style: TextStyle(
+                  height: 1.4,
+                  decoration: this.checkItem.checked
+                      ? TextDecoration.lineThrough
+                      : TextDecoration.none),
+            ),
+          ),
         ),
       ],
     );

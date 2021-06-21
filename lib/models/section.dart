@@ -13,15 +13,15 @@ class Section {
     this.subsections = const [],
   });
 
-  factory Section.fromMap(Map json) {
+  factory Section.fromMap(Map sectionMap) {
     return Section(
-      sectionName: json['section_name'] ?? json['sectionName'],
-      checkItems: ((json['check_items'] ?? json['checkItems'] ?? [])
+      sectionName: sectionMap['section_name'] ?? sectionMap['sectionName'],
+      checkItems: ((sectionMap['check_items'] ?? sectionMap['checkItems'] ?? [])
               as List<dynamic>)
           .map((checkItem) => CheckItem.fromMap(checkItem))
           .toList(),
-      subsections: (json['subsections'] ?? [])
-          .map((subsection) => Section.fromMap(subsection))
+      subsections: (sectionMap['subsections'] ?? [])
+          .map<Section>((subsection) => Section.fromMap(subsection))
           .toList(),
     );
   }

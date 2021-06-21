@@ -17,7 +17,8 @@ class CheckList extends StatelessWidget {
       margin: EdgeInsets.only(
         left: DEFAULT_MARGIN,
         right: DEFAULT_MARGIN,
-        top: DEFAULT_MARGIN,
+        top: DEFAULT_MARGIN / 2,
+        bottom: DEFAULT_MARGIN / 2
       ),
       child: Column(
         children: [

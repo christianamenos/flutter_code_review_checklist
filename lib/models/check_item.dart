@@ -9,10 +9,10 @@ class CheckItem {
     this.checked = false,
   });
 
-  factory CheckItem.fromMap(Map json) {
+  factory CheckItem.fromMap(Map checkItemMap) {
     return CheckItem(
-      text: json['text'],
-      checked: json['checked'],
+      text: checkItemMap['text'],
+      checked: checkItemMap['checked'],
     );
   }
 
