@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.christianamenos.code_review_checklist">
+    package="com.montfoc.code_review_checklist">
     <!-- Flutter needs it to communicate with the running application
          to allow setting breakpoints, to provide hot reload, etc.
     -->

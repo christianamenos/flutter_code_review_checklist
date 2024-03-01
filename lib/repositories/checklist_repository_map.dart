@@ -1,4 +1,5 @@
 import 'package:code_review_checklist/models/section.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'checklist_repository.dart';
 
@@ -18,6 +19,25 @@ class ChecklistRepositoryMap implements ChecklistRepository {
     return this._buildSectionListFromMap(defaultSections);
   }
 
+  @override
+  void saveChecklistState(List<Section> checklist) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setStringList(
+      "checklist",
+      checklist.map((section) => section.toJson()).toList(),
+    );
+  }
+
+  @override
+  Future<List<Section>> getChecklistLastState() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var checklist = preferences
+        .getStringList("checklist")
+        ?.map((sectionJson) => Section.fromJson(sectionJson))
+        .toList();
+    return checklist ?? [];
+  }
+
   List<Section> _buildSectionListFromMap(List<Map> defaultSections) {
     return defaultSections
         .map((sectionMap) => Section.fromMap(sectionMap))
@@ -30,7 +50,7 @@ class ChecklistRepositoryMap implements ChecklistRepository {
         'section_name': 'Correctness',
         'check_items': [
           {
-            'text': 'The code exposes or uses the API as agreed',
+            'text': 'The code exposes or consumes the API as agreed',
             'checked': false,
           },
           {
@@ -45,7 +65,7 @@ class ChecklistRepositoryMap implements ChecklistRepository {
           },
           {
             'text':
-                'There are too many changes? (divide into smaller code reviews, nobody wants to read long code reviews, and focus decreases over time)',
+                'There are not too many changes (divide into smaller code reviews, nobody wants to read long code reviews, the focus decreases over time)',
             'checked': false,
           },
         ],
@@ -55,7 +75,7 @@ class ChecklistRepositoryMap implements ChecklistRepository {
         'check_items': [
           {
             'text':
-                'The code was tested end to end (What are the steps to test the code?)',
+                'The code was tested end to end (the steps to test the code are documented)',
             'checked': false,
           },
           {
@@ -63,16 +83,16 @@ class ChecklistRepositoryMap implements ChecklistRepository {
             'checked': false,
           },
           {
-            'text': 'Test cover edge cases / errors / exceptions',
+            'text': 'Tests cover edge cases / errors / exceptions',
             'checked': false,
           },
           {
-            'text': 'Has enough automated tests (unit / integration / e2e)',
+            'text': 'Automated test coverage us above the threshold (unit / integration / e2e)',
             'checked': false,
           },
           {
             'text':
-                'Main branch was rebased / merged with latest changes and test it again',
+                'Main branch was rebased / merged with latest changes and tested with those changes',
             'checked': false,
           },
           {
@@ -80,7 +100,7 @@ class ChecklistRepositoryMap implements ChecklistRepository {
             'checked': false,
           },
           {
-            'text': 'The change self-reviewed',
+            'text': 'The change was self-reviewed',
             'checked': false,
           },
         ],
@@ -89,7 +109,7 @@ class ChecklistRepositoryMap implements ChecklistRepository {
         'section_name': 'Code style',
         'check_items': [
           {
-            'text': 'The name of the variables / functions / classes are clear',
+            'text': 'The name of the variables / functions / classes are understandable',
             'checked': false,
           },
           {
@@ -119,7 +139,7 @@ class ChecklistRepositoryMap implements ChecklistRepository {
           },
           {
             'text':
-                'The code review / commit message describe what was changed',
+                'The code review / commit message is descriptive',
             'checked': false,
           },
           {
@@ -133,7 +153,7 @@ class ChecklistRepositoryMap implements ChecklistRepository {
             'checked': false,
           },
           {
-            'text': 'Are all reviewers were added',
+            'text': 'All reviewers were added',
             'checked': false,
           },
           {
@@ -147,11 +167,11 @@ class ChecklistRepositoryMap implements ChecklistRepository {
         'section_name': 'Best practices',
         'check_items': [
           {
-            'text': 'The solution is not over-engineering',
+            'text': 'The solution does not over-engineer',
             'checked': false,
           },
           {
-            'text': 'Functions are short and do what their name say',
+            'text': 'Functions are short and do what their name says',
             'checked': false,
           },
           {
@@ -195,7 +215,7 @@ class ChecklistRepositoryMap implements ChecklistRepository {
           },
           {
             'text':
-                'The code makes use of language / framework specific features (does not reinventing the wheel)',
+                'The code uses language / framework specific features (do not reinvent the wheel)',
             'checked': false,
           },
           {
@@ -213,11 +233,11 @@ class ChecklistRepositoryMap implements ChecklistRepository {
         'section_name': 'Dependencies',
         'check_items': [
           {
-            'text': 'There are no deprecated / obsolete dependencies',
+            'text': 'The code do not use deprecated / obsolete dependencies',
             'checked': false,
           },
           {
-            'text': 'Vulnerable dependencies were addressed',
+            'text': 'The code does not contain vulnerable dependencies',
             'checked': false,
           },
         ],
@@ -230,7 +250,7 @@ class ChecklistRepositoryMap implements ChecklistRepository {
             'checked': false,
           },
           {
-            'text': 'Important events are logged',
+            'text': 'Important events are properly logged',
             'checked': false,
           },
           {
@@ -243,11 +263,11 @@ class ChecklistRepositoryMap implements ChecklistRepository {
         'section_name': 'Security and privacy',
         'check_items': [
           {
-            'text': 'The change is not exposing private information or endpoints (we are not exposing information to unauthorized users or hackers)',
+            'text': 'The change is not exposing private information or endpoints (do not expose information to unauthorized users or hackers)',
             'checked': false,
           },
           {
-            'text': 'Inputs data is properly sanitized',
+            'text': 'Input data are sanitized',
             'checked': false,
           },
           {
